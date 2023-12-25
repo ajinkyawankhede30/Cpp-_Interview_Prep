@@ -1,0 +1,54 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <cctype>
+#include <string>
+#include <cstring>
+
+//to check of the iput char is alphanumeric. returns 1 if true and 0 if false
+bool isAlphanum(char c)
+{
+    return std::isalnum(c);
+}
+
+void ReverseStr(std::string& input)
+{
+    int left = 0; //index
+    int right =input.length() -1; //index
+    
+    while(left < right)
+    {
+        if(isAlphanum(input[left]) && isAlphanum(input[right]))
+        {
+            char temp = input[left];
+            input[left] = input[right];
+            input[right] = temp;
+            right--;
+            left++;
+        }
+        else
+        {
+            if(!isAlphanum(input[left]))
+                left++;
+            if(!isAlphanum(input[right]))
+                right--;
+        }
+    }
+}
+int main()
+{
+    std::string input;
+    std::cout<< "Enter string: ";
+    std::getline(std::cin, input);
+    ReverseStr(input);
+    std::cout << "Reverse string: " << input << std::endl;
+    
+    
+    return 0;
+}

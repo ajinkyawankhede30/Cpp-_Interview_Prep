@@ -1,0 +1,42 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+
+//using namespace std;
+//1.iterative approach
+int factorial(int num)
+{
+    int result = 1;
+    if(num == 1)
+        return result;
+    
+    for(int i = num; i >= 1; i--)
+    {
+        result = result*i;
+    }
+
+    return result;
+}
+
+//2.reccursive approach
+int Factorial(int num)
+{
+    int result = 1;
+    if(num ==1)
+        return result;
+    else
+        return num * Factorial(num-1);
+}
+
+int main()
+{
+    std::cout <<"factorial: " << factorial(5) << std::endl;
+    std::cout <<"Factorial: " << Factorial(4) << std::endl;
+    return 0;
+}

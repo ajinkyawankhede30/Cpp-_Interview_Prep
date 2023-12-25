@@ -1,0 +1,60 @@
+#include <iostream>
+
+class Entity{
+    
+    int x;
+    double y;
+    
+public:
+
+    
+    Entity(int a, double b)
+        :x(a),y(b){}
+    
+    Entity operator + (Entity& obj)
+    {
+        Entity e1(0,0.0);
+        e1.x = x + obj.x;
+        e1.y = y + obj.y;
+        return e1;
+    }
+    
+    Entity operator - (Entity& obj);
+
+    
+int GetX()
+{return x;}
+
+double GetY()
+{return y;}
+
+};
+
+std::ostream& operator << (std::ostream& stream, Entity& obj)
+{
+    stream << obj.GetX() << "+ i" << obj.GetY();
+    return stream;
+}
+
+Entity Entity::operator - (Entity& obj)
+ {
+     Entity e2(0,0.0);
+     e2.x = x - obj.GetX();
+     e2.y = y - obj.GetY();
+     return e2;
+ }
+
+int main()
+{
+    Entity E1(10,5.2);
+    Entity E2(20,15.5);
+    Entity E3 = E1 + E2;
+    std::cout << E3 << std::endl;
+    std::cout << E2 << std::endl;
+    std::cout << E1 << std::endl;
+    
+    Entity E4 = E2 - E1;
+    std::cout << E4 << std::endl;
+    
+    return 0;
+}

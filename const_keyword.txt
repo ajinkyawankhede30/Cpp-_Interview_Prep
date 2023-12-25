@@ -1,0 +1,59 @@
+#include <iostream>
+
+int main()
+{
+    char a = 'A';
+    char b = 'B';
+    char c = 'C';
+    
+    //1. Value of Variable is made const
+    const char *ptr = &a;  //pointer to const char
+    //char const *ptr = &a //same as above line
+    //*ptr = 'B';  //gives compile time error as it is read only variable
+    ptr = &b;  //whereas address of variable (ptr) can be changed.
+    std::cout << *ptr << std::endl;
+    
+    //2. Address of variable is made constant
+    char* const ptr1 = &b; //address of variable is made constant.
+    //ptr1 = &a;  //if we try to change the address of variable it will generate error.
+    *ptr1 = 'C';  //whereas if we assign new value to variable it will get assigned.
+    std::cout << *ptr << std::endl;
+    
+    //3. Both value and address are made constant
+    const char* const ptr3 = &c; //here both pointer and variable are made constant.
+    //ptr3 = &a;  //it doesn't allow to change the address
+    //*ptr3 = 'D';  //it doesn't allow to chage the value of variable
+    
+    
+    return 0;
+}
+
+
+
+
+/********************************************************************************/
+#include <iostream>
+
+int main()
+{
+    char a = 'A';
+    char b = 'B';
+    char c = 'C';
+    
+   //1.value of variable is constant
+    const char* var1 = &a;
+    //*var = 'B'; //error
+    var1 = &b;   //success
+    
+    //2.Address is constant
+    char* const var2 = &b;
+    *var2 = 'C';  //success
+    //var2 = &c;  //error
+    
+    //3.Both address and value of variable is const
+    const char* const var3 = &c;
+    *var3 = 'D'; //error
+    var3 = &a;  //error
+    
+    return 0;
+}

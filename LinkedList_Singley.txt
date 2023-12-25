@@ -1,0 +1,40 @@
+#include <iostream>
+
+class Node{
+  
+  public:
+    int data;
+    Node* next;
+};
+
+void Push(Node** head, int data)
+{
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->next = *head;
+    
+    *head = newNode;
+}
+
+int count(Node* head)
+{
+    int count = 0;
+    Node* current = head;
+    while(current != NULL)
+    {
+        count++;
+        current = current->next;
+    }
+    return count;   
+}
+int main()
+{
+    Node* myNode = NULL;
+    Push(&myNode, 1);
+    Push(&myNode, 2);
+    Push(&myNode, 3);
+    Push(&myNode, 4); 
+    
+    std::cout << count(myNode) << std::endl;
+    return 0;
+}

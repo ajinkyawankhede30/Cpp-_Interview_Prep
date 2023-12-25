@@ -1,0 +1,48 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+
+
+template <typename T>
+class Calculate
+{
+    T x;
+    T y;
+    public:
+    Calculate(T a, T b)
+            :x(a),y(b)
+            {}
+            
+    T Area_rect()
+    {
+        return x * y;
+    }
+    
+    T Perimeter_rect(){return 2*(x +y);}
+    friend std::ostream& operator << (std::ostream& stream, Calculate<int>& obj);
+};
+
+std::ostream& operator << (std::ostream& stream, Calculate<int>& obj){
+    stream << "Len: "<<obj.x << " Width: " << obj.y << std::endl;
+    return stream;
+}
+
+int main()
+{
+    Calculate<int> Obj1(25,4);
+    Calculate<double> Obj2(25.25,4.75);
+    Calculate<float> Obj3(25.45f,4.85f);
+    std::cout << Obj1.Area_rect() << "   " << Obj1.Perimeter_rect() << std::endl;
+    std::cout << Obj2.Area_rect() << "   " << Obj2.Perimeter_rect() << std::endl;
+    std::cout << Obj3.Area_rect() << "   " << Obj3.Perimeter_rect() << std::endl;
+    
+    std::cout << Obj1 << std::endl;
+    return 0;
+}

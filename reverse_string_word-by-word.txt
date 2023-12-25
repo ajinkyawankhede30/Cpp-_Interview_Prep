@@ -1,0 +1,49 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+std::string ReverseStr(std::string s)
+{
+    //i : to loop through string
+    //l : represents start of each word in string
+    //h : represents end of each word in string
+    //n : length of string
+    
+    int i = 0; int l = 0; int h = 0;
+    int n = s.length();
+    while(i < n -1)
+    {
+        //loop to find the last index of each word
+        while(i < n-1 && s[i + 1] != ' ')
+            i++;
+        
+        h = i; //found last index of word
+        
+        while(l < h)
+        {
+            //reverse the word usng two pointer approach
+            std::swap(s[l], s[h]);
+            l++;
+            h--;
+        }
+        //move to start of next word
+        i = i +2;
+        l = i;
+    }
+    return s;
+}
+
+int main()
+{
+    std::string s = "Hello Ajinkya. How are you?";
+    std::cout << ReverseStr(s) << std::endl;
+
+    return 0;
+}
+

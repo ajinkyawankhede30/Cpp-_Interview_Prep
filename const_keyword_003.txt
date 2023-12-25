@@ -1,0 +1,49 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+// C++ program to demonstrate the
+// above concept
+#include <iostream>
+using namespace std;
+
+// Driver Code
+int main()
+{
+    
+    int a = 100;
+    char b = 'c';
+    
+    //variable x and y are declared const, so can't change the values.
+    //However memory address of variable can be changed.
+    const int* x = &a;
+    const char* y = &b;
+    
+    //below code gives compiler error
+    x = 80;
+    y = 'r';
+    
+    //change values of 
+    a = 120;
+    b = 'D';
+    std::cout << *x  << "  " << *y << std::endl;
+    
+    
+    int p = 150;
+    char q = 'W';
+    //pointer is made const
+    int* const var1 = &p;
+    char* const var2 = &q;
+    
+    //cannot change the address of variable since pointer to variable is const
+    var1 = &a;
+    var2 = &b;
+    std::cout << *var1 << " " << *var2 << std::endl;
+    
+    
+    return 0;
+}

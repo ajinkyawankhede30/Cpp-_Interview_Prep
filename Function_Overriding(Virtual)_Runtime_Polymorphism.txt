@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cmath>
+
+
+class BaseClass
+{
+    public:
+    virtual void Print()
+    {
+        std::cout << "Hello Ajinkya" << std::endl;
+    }
+    
+    void Message()
+    {
+        std::cout << "Have a great day..!" << std::endl;
+    }
+    
+};
+
+class Derived : public BaseClass
+{
+    public:
+    void Print() override
+    {
+        std::cout << "Hello Ajinkya (Called from Derived class)" << std::endl;
+    }
+    
+    void Message()
+    {
+        std::cout << "Good Night..!" << std::endl;
+    }
+};
+
+int main()
+{
+    BaseClass* bclass;
+    Derived drvClass;
+    //assign reference of Derived class to base class
+    bclass = &drvClass;
+    
+    //this is call the virtual function
+    std::cout << "Virtual function is called"<< std::endl;
+    bclass->BaseClass::Print();
+    bclass->BaseClass::Message();
+    
+    std::cout << std::endl;
+    //overridden function is called from derived class
+    std::cout << "Overriden function is called"<< std::endl;
+    bclass->Print();
+    bclass->Message();
+    
+    std::cout << std::endl;
+    //funcion called from derived class
+    std::cout << "Derived class function is called"<< std::endl;
+    Derived drvObj;
+    drvObj.Print();
+    drvObj.Message();
+    return 0;
+}

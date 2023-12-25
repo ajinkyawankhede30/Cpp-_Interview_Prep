@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cmath>
+
+class Entity
+{
+  int x;
+  int y;
+
+public: 
+Entity()
+:x(0),y(0)
+{}
+ 
+Entity(int a, int b)
+:x(a),y(b)
+{}
+
+Entity operator + (const Entity& obj)
+{
+    Entity result;
+    result.x = x + obj.x;
+    result.y = y + obj.y;
+    return result;
+}
+
+void Print()
+{
+    std::cout << x  << "+ i" << y << std::endl;
+}
+
+int GetX()
+{return x;}
+
+int GetY()
+{return y;}
+
+};
+
+std::ostream& operator << (std::ostream& stream, Entity& obj)
+{
+    stream << obj.GetX() << "+ i" << obj.GetY() << std::endl;
+    return stream;
+}
+
+int main()
+{
+    Entity obj1(10,20);
+    Entity obj2(5,25);
+    Entity obj3 = obj1 + obj2;
+    std::cout << obj3 << std::endl;
+}

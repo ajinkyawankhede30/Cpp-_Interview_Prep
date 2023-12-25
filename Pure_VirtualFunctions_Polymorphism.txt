@@ -1,0 +1,49 @@
+#include <iostream>
+
+//Notes: 
+//Virtual functions cannot be static and cannot be a friend function of another class
+//A class can Virtual destructors but not virtual constructor
+//Vitual functions should be access using (*)pointer or (&)reference to base class to achieve runime polymorphism
+
+class Animal{
+    public:
+        virtual void baby() {std::cout << "Animal baby";} //1. virtual function
+        virtual void eat() = 0; //2. pure virtual function
+};
+
+class Cat : public Animal{
+    public:
+    void baby() {std::cout << "Kitten" << std::endl;}
+    
+    void eat(){
+            std::cout << "Cat eats non-veg" << std::endl;
+        }
+};
+
+class Cow : public Animal{
+    public:
+    
+    void baby() {std::cout << "Calf" << std::endl;}
+    
+    void eat(){
+            std::cout << "Cow eats veg" << std::endl;
+        }
+};
+
+int main()
+{
+    //Cat cat;
+    //Animal &Obj = cat;  //using & reference 
+    //Obj.baby();
+    //Obj.eat();
+    
+    Animal *Obj1 = new Cat();
+    Obj1->baby();
+    Obj1->eat();
+    
+    Animal *Obj2 = new Cow();
+    Obj2->baby();
+    Obj2->eat();
+    
+    return 0;
+}

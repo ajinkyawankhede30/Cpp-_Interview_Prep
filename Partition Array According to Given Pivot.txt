@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> pivotArray(vector<int>& nums, int pivot) 
+    {
+        /*
+        1. find the pivot index in array
+        2. left and right index
+        3. check if element[left] < pivot and element[right] > pivot
+        4. loop until left < right 
+        */
+
+        std::vector<int> result[nums.size()];
+        int left = 0, right = nums.size() - 1;
+        std::vector<int>::iterator itr = std::find(nums.begin(), nums.end(), pivot);
+        int indx = itr - v.begin();
+
+        while(left < right)
+        {
+            if(nums[left] < pivot)
+            {
+                result[left] = nums[left];
+                left++;
+            }
+            if(nums[right] > pivot)
+                right--;
+        }
+    }
+};

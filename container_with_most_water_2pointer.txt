@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) 
+    {   
+        int max_area = 0, i=0;
+        int n = height.size()-1;
+        while(i < n)
+        {
+            int temp;
+            
+            //check the min height between two verticals
+            if(height[i] < height[n])
+            {
+                //calcualte area using height x width
+                temp = height[i] * (n-i);
+                i++;
+            }
+            else
+            {
+                temp = height[n] * (n-i);
+                n--;
+            }
+            
+            max_area = std::max(max_area, temp);
+            //if(max_area < temp)
+            //    max_area = temp;
+
+        }
+        return max_area;
+    }
+};
+
+int main()
+{
+    std::vector<int> heights = {1,8,6,2,5,4,8,3,7};
+    Solution obj;
+    int area = obj.maxArea(heights);
+    std::cout << area << std::endl;
+    
+    return 0;
+    
+}

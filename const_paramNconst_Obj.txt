@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+
+class Entity
+{
+  std::string name;
+  
+ public:
+  void print(std::string* s)
+  {std::cout << *s << std::endl;}
+  
+  void print(const std::string* s)
+  {std::cout << *s << std::endl;}
+  
+  void func()
+  {std::cout << "Non_Const function" << std::endl;}
+  
+  void func() const
+  {std::cout << "Const fuction" << std::endl;}
+  
+};
+
+int main()
+{
+    Entity E1;
+    std::string s = "Ajinkya"; //non-const variable
+    const std::string cs = "Wankhede";  //const variable
+    
+    //when parameters are passed by values compiler gives error as it is unable to differentiate the functions
+    //E1.print(s);
+    //E1.print(cs);
+    
+    //here function overloading is possible only by passing parameter as reference/pointer
+    E1.print(&s);
+    E1.print(&cs);
+    
+    //non-const entity object calls non-const function
+    E1.func();
+    
+    //const Entity object calls const function
+    const Entity E2;
+    E2.func();
+    
+    return 0;
+}

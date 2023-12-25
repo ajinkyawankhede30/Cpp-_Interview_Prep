@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+
+int max_area(std::vector<int> heights)
+{
+	int left = 0;
+	int right = heights.size() -1;
+	int max_area = 0; 
+	while(left < right)
+	{
+		int temp;
+		if(heights[left] < heights[right])
+ 		{
+			temp = heights[left] * (right - left);
+			left++;
+		}
+		else
+		{
+			temp = heights[right] * (right - left);
+			right--;
+		}
+
+		max_area = std::max(max_area, temp);
+	}
+
+	return max_area;
+}
+
+int main()
+{
+	std::vector<int> heights = {1,5,9,5,4,12,7,6};
+	std::cout<< "Max water container  can hold: " << max_area(heights) << std::endl;
+	return 0;
+}
+
+
+
+
+
+
