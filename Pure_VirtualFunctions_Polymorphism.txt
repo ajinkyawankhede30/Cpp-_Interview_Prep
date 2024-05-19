@@ -2,7 +2,7 @@
 
 //Notes: 
 //Virtual functions cannot be static and cannot be a friend function of another class
-//A class can Virtual destructors but not virtual constructor
+//A class can have Virtual destructors but not virtual constructor
 //Vitual functions should be access using (*)pointer or (&)reference to base class to achieve runime polymorphism
 
 class Animal{

@@ -1,0 +1,32 @@
+
+#include <iostream>
+#include <algorithm>
+
+int main()
+{
+    //using extra var
+    std::string str = "Hello";
+    std::string reversed = "";
+    for (int i = str.length() - 1 ; i >= 0 ; i--) 
+    {
+        reversed += str[i];    
+    }
+    
+    std::cout << reversed << "\n";
+    
+    //2 pointer approach
+    int l =0; int n = str.length() -1; 
+    while(l < n)
+    {
+        std::swap(str[l] , str[n]);
+        l++;
+        n--;
+    }
+    std::cout << str << "\n";
+    
+    //using reverse from alogrithm
+    std::string str2 = "World"; 
+    std::reverse(str2.begin(), str2.end());
+    std::cout << str2 << "\n";
+    return 0;
+}

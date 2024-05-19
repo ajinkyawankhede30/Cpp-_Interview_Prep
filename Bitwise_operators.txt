@@ -1,0 +1,23 @@
+//Bitwise operators
+<< bit shift left
+>> bit shift right
+& AND
+|  OR
+^  XOR
+~  NOT
+#include <iostream>
+
+int main()
+{
+    int a = 5;
+    a <<= 1; // a * (2^n) here n = 1
+    std::cout << a << "\n";
+    a >>= 1;  //a / (2^n) here n = 1
+    std::cout << a << "\n";
+    
+    a <<= 2; // a * (2^n) here n = 2
+    std::cout << a << "\n";
+    a >>= 2;  // a / (2^n) here n = 2
+    std::cout << a << std::endl;
+    return 0;
+}

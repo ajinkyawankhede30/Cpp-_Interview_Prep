@@ -1,0 +1,49 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+//https://www.learncpp.com/cpp-tutorial/virtual-destructors-virtual-assignment-and-overriding-virtualization/
+
+
+#include <iostream>
+
+class Base{
+  public:
+  Base()
+  {
+      std::cout<< "Base class constructor called..." << std::endl;
+  }
+  virtual ~Base() //make base class destructor virtual
+  {
+      std::cout<< "Base class destructor called..." << std::endl;
+  }
+};
+
+class Derived : public Base
+{
+    private:
+    int* array{};
+    
+    public:
+    Derived(int len)
+    : array{new int[len]}
+    {std::cout<< "Derived class constructor is called..." << std::endl;}
+    
+    ~Derived()
+    {
+        delete[] array;
+        std::cout<< "Derived class destructor called..." << std::endl;
+    }
+};
+
+int main()
+{
+    Derived* derived = new Derived(10);
+    Base* base = derived;
+    
+    delete base;
+    return 0;
+}

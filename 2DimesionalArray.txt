@@ -1,0 +1,68 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //**************Creating 2 dimensional array statically****************//
+    int arr[][3] = {{10,20,30}, {40,50,60}, {70,80,90}};
+    int rows = sizeof(arr)/sizeof(int);
+    for(int i =0; i < 3 ; i++)
+    {
+        for (int j = 0; j < 3; j++) 
+        {
+            std::cout << arr[i][j] << " ";
+        }
+    }
+    std::cout << "\n";
+    
+    //**********Creating 2 dimensional array using dynamic allocation********//
+    int r = 3; //row
+    int c = 3; //column
+    int val = 10;
+    int** nums = new int*[r];
+    
+    //allocate block of memory for each row r
+    for (int i = 0; i < r; i++) 
+    {  
+        nums[i] = new int[c] ;   
+    }
+    
+    //assign value
+    for (int i = 0; i < r; i++) 
+    {
+        for (int j = 0; j < c; j++) 
+        {
+            nums[i][j] = val++; 
+        }
+    }
+    
+    //print
+    for (int i = 0; i < r; i++) 
+    {
+        for (int j = 0; j < c; j++) 
+        {
+            std::cout << nums[i][j] << " ";
+        }
+    }
+    
+    //delete array
+    //1. Delete each row
+    for (int i = 0; i < m; i++) 
+    {
+        delete[] nums[i];
+    }
+    
+    //2. delete entire array
+    delete[] nums;
+    
+    return 0;
+}
+

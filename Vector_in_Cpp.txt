@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+	std::vector<int> nums = { 5,4,8,74,83,94,52,44,48,50 };
+	auto itr1 = std::find(nums.begin(), nums.end(), 74);
+	if(itr1 != nums.end())
+	{
+	    std::cout << "Element 74 found at index: " << itr1 - nums.begin() << "\n"; 
+	}
+	
+	std::cout << nums.size() << "\n";
+	std::cout << nums.at(4) << "\n";
+	std::cout << nums.capacity() << "\n";
+
+	nums.emplace_back(54);
+	for (auto num : nums)
+		std::cout << num << " ";
+	
+	std::cout << std::endl;
+	auto itr2 = std::find_if(nums.begin(), nums.end(), [](int x)
+		{return x > 80  ;});
+
+	std::cout << *itr2 << "\n";
+	
+	std::reverse(nums.begin(), nums.end());
+	for (auto num : nums)
+		std::cout << num << " ";
+	
+	std::getchar();
+	auto itr3 = std::find(nums.begin(), nums.end(), 94);
+	std::reverse(nums.begin(), itr3);
+	for (auto num : nums)
+		std::cout << num << " ";
+	
+	std::getchar();	
+	std::sort(nums.begin(), nums.end());
+	for (auto num : nums)
+		std::cout << num << " ";
+	
+	std::getchar();	
+	int arr[] = { 1,2,5,88,74,9,48 };
+	
+	int len = sizeof(arr) / sizeof(arr[0]);
+	std::sort(arr, arr + len);
+	for (int i = 0; i < len; i++)
+	{
+		std::cout << arr[i] << " ";
+	}
+	return 0;
+}

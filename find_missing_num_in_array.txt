@@ -1,0 +1,23 @@
+//Find missing number in sorted array stating from 1 to n
+
+#include <iostream>
+
+int MissingNum(int arr[],int len)
+{
+    int sum = 0;
+    for (int i = 1; i < len; i++) {
+        sum += i;
+        sum -= arr[i];
+    }
+    return abs(sum);
+}
+
+int main()
+{
+    int arr[] = {1,2,3,4,5,7};
+    int len = sizeof(arr)/ sizeof(int);
+    int missingNum = MissingNum(arr, len);
+    std::cout << "Missing number in array: " << missingNum << std::endl;
+    
+    return 0;
+}

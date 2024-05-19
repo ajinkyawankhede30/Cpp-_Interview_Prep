@@ -25,7 +25,7 @@ class Cat: public I_Animal
     public:
     void Type()
     {
-        Animal::Type(); // base function
+        I_Animal::Type(); // base function
         std::cout << "Cat is domestic animal" << std::endl;
     }
 };

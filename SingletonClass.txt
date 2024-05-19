@@ -1,0 +1,37 @@
+#include <iostream>
+
+class Singleton
+{
+public:
+ 
+  //Diable copy constructor
+    Singleton(const Singleton&) = delete;
+    
+//method to return instance
+  static Singleton& GetInstance()
+  {
+      return m_instance;
+  }
+  
+  void GetTime() {std::cout << "Current Time: \n";}
+  
+private:
+  //disable constructor
+  Singleton() {};
+  
+  //static instance
+  static Singleton m_instance;
+  
+  
+  
+};
+
+Singleton Singleton::m_instance;
+
+int main()
+{
+    Singleton& instance = Singleton::GetInstance();
+    instance.GetTime();
+    //or
+    Singleton::GetInstance().GetTime();
+}

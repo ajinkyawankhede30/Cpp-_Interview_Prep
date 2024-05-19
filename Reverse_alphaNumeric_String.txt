@@ -11,7 +11,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
 #include <string>
 #include <cstring>
 
-//to check of the iput char is alphanumeric. returns 1 if true and 0 if false
+//to check if the iput char is alphanumeric. returns 1 if true and 0 if false
 bool isAlphanum(char c)
 {
     return std::isalnum(c);

@@ -1,0 +1,23 @@
+#include <iostream>
+#include <bitset>
+
+std::string isEachBitSet(int n)
+{
+    if(n == 0)
+        return "NO\n";
+    while(n > 0)
+    {
+        if((n & 1) == 0)
+            return "NO\n";
+        else
+            n = n >> 1;
+    }
+    return "YES\n"; 
+}
+
+int main()
+{
+    int x = 15;
+    std::cout << isEachBitSet(x);
+    return 0;
+}
