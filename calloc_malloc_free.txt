@@ -1,0 +1,51 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <cstdlib>
+
+int main()
+{
+    int* ptr;
+    ptr = (int*)calloc(5, sizeof(int));
+    
+    if(!ptr)
+    {
+        std::cout << "Initialization failed...!" << "\n";
+        return 0;
+    }
+    
+    for(int i = 0; i < 5; i++)
+    {
+        ptr[i] = i * 2+ 1;
+    }
+    
+    for (int j = 0; j < 5; j++)
+    {
+       std::cout << *(ptr + j) << "\n";
+    }
+    free(ptr);
+    std::cout << "Address: "<< ptr << "\n";
+    
+    int* a = (int*)malloc(sizeof(int));
+    
+    *a = 10;
+    std::cout << "Value a [before free]= "<< *a << "\n";
+    free(a);
+    std::cout << "Value a [after free]= "<< *a << "\n";
+    
+
+    int* arr = (int*)calloc(4, sizeof(int));
+    arr[0] = 10;
+    arr[1] = 11;
+    arr[2] = 12;
+    arr[3] = 13;
+    for(int j = 0; j < 4; j++)
+        std::cout << *(arr + j) << "\n";
+    return 0;
+}

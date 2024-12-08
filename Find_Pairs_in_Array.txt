@@ -1,0 +1,30 @@
+/*Find the pair of elements in array who's sum is eqaul to target value.
+ Avoid printing duplicate pairs [4,6] [6,4] [5,5] Target = 10
+*/
+
+#include <iostream>
+#include <algorithm>
+
+void FindPairs(int* arr, int size, int target)
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = i+1; j < size; j++) 
+        {
+            int sum = arr[i] + arr[j];
+            if(sum == target)
+                std::cout << arr[i] << " " << arr[j] << "\n";
+                
+        }
+    }
+}
+
+int main()
+{
+    int nums[] = {5,8,6,7,4,1,2,9,3};
+    int target = 10;
+    int size = sizeof(nums)/sizeof(int);
+    FindPairs(nums,size, target);
+
+    return 0;
+}

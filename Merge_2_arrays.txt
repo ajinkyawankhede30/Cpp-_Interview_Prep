@@ -8,7 +8,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
 #include <iostream>
 
-int* MergeArrays(int arr1[], int arr2[], int len1, int len2, int result[])
+void MergeArrays(int arr1[], int arr2[], int len1, int len2, int result[])
 {
     int i = 0; int j =0; int k = 0;
     while(i < len1 && j < len2)
@@ -30,8 +30,7 @@ int* MergeArrays(int arr1[], int arr2[], int len1, int len2, int result[])
     {
         result[k++] = arr2[j++];
     }
-    
-    return result;
+
 }
 
 int main()

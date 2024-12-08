@@ -15,7 +15,7 @@ class Entity
   void func()
   {std::cout << "Non_Const function" << std::endl;}
   
-  void func() const
+  void cfunc() const
   {std::cout << "Const fuction" << std::endl;}
   
 };
@@ -39,7 +39,10 @@ int main()
     
     //const Entity object calls const function
     const Entity E2;
-    E2.func();
+    E2.cfunc();
     
+    //non-const object can call const function
+    E1.cfunc();
+
     return 0;
 }

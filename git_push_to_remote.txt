@@ -1,0 +1,19 @@
+Pull Changes from the Remote Repository
+First, make sure you're on the branch where you want to merge the changes.
+For example, if you want to merge changes into the main branch:
+
+git checkout main
+git pull origin main
+
+Merge Changes from Another Branch
+If you want to merge changes from another branch (let's say feature-branch) into main:
+
+git merge feature-branch
+
+
+git add .
+
+git commit -m "Merged feature-branch into main"
+
+Push Changes to the Remote Repository:
+git push origin main
