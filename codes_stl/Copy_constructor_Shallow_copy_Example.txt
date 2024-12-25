@@ -1,0 +1,48 @@
+#include <iostream>
+
+
+/* In shallow copy, an object is created by simply copying the data of all variables of the original object. 
+This works well if none of the variables of the object are defined in the heap section of memory. 
+If some variables are dynamically allocated memory from the heap section, then copied object variable will also reference the same memory location.
+
+This will create ambiguity and run-time errors dangling pointer. Since both objects will reference the same memory location, 
+then change made by one will reflect those change in another object as well. 
+Since we wanted to create a replica of the object, this purpose will not be filled by Shallow copy.*/
+
+class Vector{
+
+    public:
+        int size;
+        int* arr;
+        
+        Vector(int x)
+        {
+            size = x;
+            arr = new int[size];
+        }
+        
+        //Object created using shallow copy shares same memory address with the object passed as parameter to copy constructor
+        Vector(Vector& v)
+        {
+            size = v.size;
+            arr = v.arr;  //share same memory address with the v.arr
+            //this may cause run time errors in application
+        }
+};
+
+int main()
+{
+    Vector obj1(2);
+    obj1.arr[0] = 10;
+    obj1.arr[1] = 20;
+    std::cout << "Obj1: " << obj1.arr[0] << " << " << obj1.arr[1] << std::endl;
+    
+    Vector obj2(obj1);
+    obj2.arr[0] = 50;
+    obj2.arr[1] = 100;
+    
+    std::cout << "Obj1: " << obj1.arr[0] << " << " << obj1.arr[1] << std::endl;
+    
+    //Here the values assigned to obj1 is changed everytime a new object is created using copy constructor 
+    return 0;
+}

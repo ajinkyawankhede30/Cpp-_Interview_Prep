@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+
+std::string ReverseEachWord(std::string& str)
+{
+    //i - loop through string
+    //l - start index of each word 
+    //r - last index of each word 
+    //n = length of string
+    
+    int i = 0; int l =0; int r;
+    int n = str.length();
+    while(i < n-1)
+    {
+        while(i < n-1 && str[i+ 1] != ' ')
+            i++;
+        
+        r = i; //found last index of word
+        
+        while(l < r)
+        {
+            std::swap(str[l], str[r]);
+            l++;
+            r--;
+        }
+        
+        l = i + 2;
+        i = i+1;
+    }
+    return str;
+}
+
+int main()
+{
+    std::string str = "Hello World India";
+    std::cout << ReverseEachWord(str) << "\n";
+    return 0;
+}

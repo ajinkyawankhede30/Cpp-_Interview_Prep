@@ -1,0 +1,50 @@
+#include <iostream>
+
+
+/* Deep copy: In deep copy, the object created using copy constructor doesn't share same memory address with the pointer vairable of already created object.
+As separate memory is allocated everytime, using new keyword to the pointer variables.*/
+
+class Vector{
+
+    public:
+        int size;
+        int* arr;//pointer variable
+        
+        Vector(int x)
+        {
+            size = x;
+            arr = new int[size]; //dynamic memory allocation using 'new'
+        }
+        
+        //Object created using shallow copy shares same memory address with the object passed as parameter to copy constructor
+        Vector(Vector& v)
+        {
+            size = v.size;
+            arr = new int[size]; //new memory is allocated on heap
+            
+            for(int i = 0; i < size; i++)
+            {
+                arr[i] = v.arr[i]; //values are copied from object v to new object
+            }
+        }
+};
+
+int main()
+{
+    Vector obj1(2);
+    obj1.arr[0] = 10;
+    obj1.arr[1] = 20;
+    std::cout << "Before creating new object by copy constructor \n";
+    std::cout << "Obj1: " << obj1.arr[0] << " << " << obj1.arr[1] << std::endl;
+    
+    Vector obj2(obj1);
+    obj2.arr[0] = 50;
+    obj2.arr[1] = 100;
+    std::cout << "After creating new object by copy constructor \n";
+    std::cout << "Obj1: " << obj1.arr[0] << " << " << obj1.arr[1] << std::endl;
+    //Here the obj1 values remains unchanged everytime a new object is created using copy constructor
+
+    std::cout << "Obj2: " << obj2.arr[0] << " << " << obj2.arr[1] << std::endl;
+ 
+    return 0;
+}

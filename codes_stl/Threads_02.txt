@@ -1,0 +1,73 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include <algorithm>
+
+using namespace std::chrono;
+
+typedef unsigned long long ULL;
+
+
+
+void findEvenSum(ULL start, ULL end, ULL* evensum)
+{
+    while(start <= end)
+    {
+        if(start%2 == 0)
+        {
+            *(evensum) += start;
+        }
+        start++;
+    }
+}
+
+void findOddSum(ULL start, ULL end, ULL* oddsum)
+{
+    while(start <= end)
+    {
+        if(start%2 != 0)
+        {
+            *(oddsum) += start;
+        }
+        start++;
+    }
+}
+
+int main()
+{
+    ULL start = 0;
+    ULL end = 1900000000;
+    
+    ULL evensum = 0;
+    ULL oddsum = 0;
+    
+    auto start_time = high_resolution_clock::now();
+    
+    //findEvenSum(start, end, &evensum);
+    //findOddSum(start, end, &oddsum);
+    
+   std::thread t1(findEvenSum, start, end, &(evensum));
+   std::thread t2(findOddSum, start, end, &(oddsum));
+   
+   //wait for the thread to finish
+   t1.join(); 
+   t2.join();
+    
+    auto end_time = high_resolution_clock::now(); 
+
+    auto duration = duration_cast<microseconds>(end_time - start_time);
+    
+    std::cout << "Even_Sum: " << evensum << "\n";
+    std::cout << "Odd_Sum: " << oddsum << "\n";
+    std::cout << "Duration: "<< duration.count()/1000000 << "\n";
+    
+    return 0;
+}

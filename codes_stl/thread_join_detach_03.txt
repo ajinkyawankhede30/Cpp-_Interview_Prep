@@ -1,0 +1,50 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include <algorithm>
+
+void Print_nums(int x)
+{
+    for (int i = 1; i < x; i++) {
+        std::cout << i << "\n";
+    }
+    
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+}
+
+int Print_factorials(int n)
+{
+    if(n != 0)
+        return n * Print_factorials(n-1);
+    else
+        return 1;
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+}
+
+int main()
+{
+    std::cout << "Start..\n";
+    std::thread t1(Print_nums, 10);
+    //detach the current thread from parent (main) thread
+    t1.detach();
+    
+    std::thread t2(Print_factorials, 5);
+    std::cout << "Factorial: " << "\n";
+    //detach the current thread from parent (main) thread
+    t2.detach();
+    
+    //wait for 10 seconds to finish the thread t1 and t2
+    //std::this_thread::sleep_for(std::chrono::seconds(10));
+    std::cout << "Finish..\n";
+    return 0;
+}
+
+//Once we go out of scope (main) then all the child threads also go out of scope and don't excute 

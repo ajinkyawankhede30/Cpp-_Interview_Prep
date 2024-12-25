@@ -1,0 +1,77 @@
+#include <iostream>
+
+//using namespace std;
+
+double a,b;
+    
+double GetArea()
+{
+    std::cout << "Enter a: ";
+    std::cin >> a;
+    std::cout << "Enter b: ";
+    std::cin >> b;
+    return a*b;
+}
+
+//Syntax: [return type (*Function_Name)(input parameter)]
+void GetVolume(double ht, double(*Cal_Area)())
+{
+    double x = Cal_Area();
+    std::cout << "Volume of Rectangle: " << ht * x << std::endl;
+}
+
+int main()
+{
+    GetVolume(5.5, GetArea);
+
+    return 0;
+}
+
+
+
+/*****************************************************************************************************/
+
+
+#include <iostream>
+#include <vector>
+//using namespace std;
+//*******************Function Pointers*********************//
+
+void Print()
+{
+    std::cout << "Hello Ajinkya..." << std::endl;
+}
+
+void PrintValues(int x)
+{
+    std::cout << "Value: " << x << std::endl;
+}
+
+void ForEch(std::vector<int>& nums, void(*function)(int))
+{
+    std::cout << "Values in vector:" << std::endl;
+    for(int x : nums)
+        function(x);
+}
+
+int main()
+{
+    //using auto-keyword
+    auto function = Print;
+    function();
+    
+    //using actual data type 'void' and name of variable
+    void(*printfunc)() = Print;
+    printfunc();
+    
+    std::vector<int> nums = {1,5,6,8,9,2,7} ;
+    
+    //Passing fuction as a parameter to a function
+    ForEch(nums,PrintValues);
+    
+    //Using lamda expression
+    std::cout << "\nUsing Lamda Expression...\n" << std::endl;
+    ForEch(nums, [](int x) {std::cout << "Value: " << x << std::endl;});
+    
+    return 0;
+}

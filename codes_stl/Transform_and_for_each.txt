@@ -1,0 +1,50 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cctype>
+
+
+int main()
+{
+    std::vector<int> a = {23,4,5,32,85,43,12,17,18};
+    std::vector<int> b = {52,41,7,5,9,48,53,61,33};
+    std::vector<int> c;
+    
+    //Overload 1: std::transform - Doesn't allow to modify the existing input values
+    //find the max number at each index of two given vectors and store in vect c
+    std::transform(a.begin(), a.end(),b.begin(), std::back_inserter(c), [](int x, int y)
+    {
+        return std::max(x,y);
+    });
+
+    for(int x : c)
+    {
+        std::cout << x << " ";
+    }
+    
+    //Overload 2: std::transform
+    std::string str = "\najinkya";
+    std::string s2;
+    std:transform(str.begin(), str.end(), std::back_inserter(s2), [](int c) {return std::toupper(c);});
+    std::cout << s2 << "\n";
+    
+    //std::for_each - Can modify the input values
+    //to double the values in given container
+    std::for_each(b.begin(), b.begin() + 5, [](int& x) 
+    {
+        x = x * 2;
+    });
+    for(int x : b)
+    {
+        std::cout << x << " ";
+    }
+    return 0;
+}

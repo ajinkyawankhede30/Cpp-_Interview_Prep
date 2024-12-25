@@ -1,0 +1,62 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <mutex>
+#include <ctime>
+#include <unistd.h>
+#include <windows.h>
+
+
+class Singleton
+{
+private:
+    //disable copy constructor
+    Singleton(const Singleton&) = delete;
+    
+    //disable constructor
+    Singleton() {}
+    
+    //disable = operator
+    Singleton operator=(const Singleton&) = delete;
+    
+    static Singleton* m_instance;
+    static std::mutex m_mutex;
+
+public:
+    static Singleton* GetInstance()
+    {
+        //std::lock_guard<std::mutex> lock(m_mutex);
+        if(m_instance == nullptr)
+        {
+            m_instance = new Singleton();
+            std::cout << "New instance created..\n";
+        }
+        return m_instance;
+    }
+    
+    void GetTime()
+    {
+        time_t timestamp = time(&timestamp);
+        std::cout <<  "Current Time: " << ctime(&timestamp) << "\n";
+    }
+};
+
+Singleton* Singleton::m_instance = nullptr;
+
+int main()
+{
+
+    Singleton* sngltn_obj = Singleton::GetInstance();
+    sngltn_obj->GetTime();
+
+    sleep(5);
+    Singleton* obj2 = Singleton::GetInstance();
+    obj2->GetTime();
+    return 0;
+}

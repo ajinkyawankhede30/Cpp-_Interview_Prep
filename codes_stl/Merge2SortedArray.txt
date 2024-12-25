@@ -1,0 +1,45 @@
+//Merge two sorted arrays
+
+
+void MergeArrays(int arr1[], int arr2[], int n1, int n2, int arr3[])
+{
+    int i, j, k;
+    i = j = k = 0;
+    
+    while(i < n1 && j < n2)
+    {
+        if(arr1[i] < arr2[j])
+            arr3[k++] = arr1[i++];
+        else
+            arr3[k++] = arr2[j++];
+    }
+    while(i < n1)
+    {
+        arr3[k++] = arr1[i++]; 
+    }
+    while(j < n2)
+    {
+        arr3[k++] = arr2[j++]; 
+    }
+    
+}
+
+
+int main()
+{
+    int arr1[] = {1,2,4,67,34,68,78};
+    int arr2[] = {6,76,89,45,10,15,22,63};
+    int n1 = sizeof(arr1)/sizeof(int);
+    int n2 = sizeof(arr2)/sizeof(int);
+    int arr3[n1 +n2];
+    int len = n1 + n2;
+    //merge two sorted arrays
+    MergeArrays(arr1, arr2, n1,n2,arr3);
+    
+    for (int i = 0; i < len; i++) {
+        /* code */
+        std::cout << arr3[i] << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}

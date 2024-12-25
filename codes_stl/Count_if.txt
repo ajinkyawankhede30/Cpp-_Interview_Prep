@@ -1,0 +1,32 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cctype>
+
+
+int main()
+{
+    std::vector<int> a = {12,4,5,12,85,43,12,17,18};
+    std::vector<int> b = {52,41,7,5,9,48,53,61,33};
+    std::vector<int> c;
+    
+    //std::count
+    int count_12 = std::count(a.begin(), a.end(), 12); 
+    std::cout << "12 count: " << count_12 << "\n";
+    
+    //std::count_if()
+    int even_count = std::count_if(a.begin(), a.end(), [](int x)
+    {
+        return x % 2 == 0;
+    });
+    std::cout << "Total even numbers in vector a: " << even_count << "\n";
+    return 0;
+}

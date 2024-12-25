@@ -1,0 +1,30 @@
+//How do you find duplicates in array? How would you solve it for the array of chars?
+
+
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+void findDuplicates(const std::vector<char>& arr) {
+    std::unordered_map<char, int> charCount;
+    
+    // Count occurrences of each character
+    for (char ch : arr) {
+        charCount[ch]++;
+    }
+    
+    // Print characters that appear more than once
+    std::cout << "Duplicates in the array: ";
+    for (const auto& pair : charCount) {
+        if (pair.second > 1) {
+            std::cout << pair.first << " ";
+        }
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<char> arr = {'a', 'b', 'c', 'a', 'd', 'b', 'e'};
+    findDuplicates(arr);
+    return 0;
+}

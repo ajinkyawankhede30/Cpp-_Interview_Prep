@@ -1,0 +1,48 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <cctype>
+#include <string>
+//using namespace std;
+
+int isAlphNum(char c)
+{
+    return std::isalnum(c);
+}
+
+void ReverseAlpNum(std::string& str)
+{
+    int left = 0; 
+    int right = str.length() - 1;
+    while(left < right)
+    {
+        if(isAlphNum(str[left]) && isAlphNum(str[right]))
+        {
+            std::swap(str[left], str[right]);
+            left++;
+            right--;
+        }
+        else
+        {
+            if(!isAlphNum(str[left]))
+                left++;
+            if(!isAlphNum(str[right]))
+                right--;
+        }
+    }
+        
+}
+
+int main()
+{
+    std::string str = "Abc.45XH@30";
+    ReverseAlpNum(str);
+    std::cout << "After reversing: " << str << std::endl;
+    return 0;
+}

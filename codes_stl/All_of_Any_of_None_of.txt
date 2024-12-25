@@ -1,0 +1,31 @@
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cctype>
+
+int main()
+{
+    std::vector<int> a = {2,4,6,9,10,12,14,16};
+    std::cout << std::all_of(a.begin(), a.end(), [](int x) 
+    {
+        return x % 2 == 0;
+    });    
+    
+    std::cout << "\n";
+    
+    //Check none of all the elements in odd number
+    std::cout << std::none_of(a.begin(), a.end(), [] (int x)
+    {
+        return x % 2 != 0;
+    });
+    
+    std::cout << "\n";
+    
+    // check if any of the element is odd number
+    std::cout << std::any_of(a.begin(), a.end(), [](int x)
+    {
+        return x % 2 != 0;
+    });
+    return 0;
+}

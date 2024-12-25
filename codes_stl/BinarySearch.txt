@@ -1,0 +1,31 @@
+
+#include <iostream>
+#include <algorithm>
+
+int BinarySearch(int* arr,int len, int num)
+{
+    int l = 0;
+    int r = len -1;
+    while( l <= r)
+    {
+        int mid = l + (r-l)/2;
+        if(arr[mid] == num)
+            return mid;
+        
+        if(arr[mid] < num)
+            l = mid +1;
+        
+        else
+            r = mid -1;
+    }
+    return -1;
+}
+
+int main()
+{
+    int arr[] = {2,4,6,7,9,14,15};
+    int num = 14;
+    int len = sizeof(arr)/sizeof(arr[0]);
+    std::cout << "Number found at index: " << BinarySearch(arr,len,num) << "\n";
+    return 0;
+}

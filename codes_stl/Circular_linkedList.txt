@@ -1,0 +1,78 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+struct Node{
+  int data;
+  Node* next;
+};
+
+Node* AddtoEmpty(Node* node, int data)
+{
+    if(node != NULL)
+        return node;
+        
+    Node* temp = new Node();
+    temp->data = data;
+    node = temp;
+    temp->next = node;
+    return node;
+}
+
+Node* AddtoEnd(Node* last, int data)
+{
+    if(last == NULL)
+        last = AddtoEmpty(last, data);
+    else
+    {
+        Node* temp = new Node();
+        temp->data = data;
+        temp->next = last->next;
+        last->next = temp;
+        last = temp;
+    }
+    return last;
+}
+
+Node* Push(Node* head, int data)
+{
+    if(head == NULL)
+        return AddtoEmpty(head, data);
+    
+    Node* temp = new Node();
+    temp->data = data;
+    temp->next = head->next;
+    head->next = temp;
+    
+    return head;
+}
+
+
+void PrintNodes(Node* node)
+{
+    Node* temp = node;
+    if(temp == NULL)
+        std::cout << "NULL" << std::endl;
+    else
+        do{
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }while(temp != node);
+    std::cout << std::endl;
+}
+
+int main()
+{   
+    Node* head = NULL;
+    head = AddtoEmpty(head, 10);
+    head = Push(head,1);
+    ///head = AddtoEnd(head,20);
+    PrintNodes(head);
+    return 0;
+}

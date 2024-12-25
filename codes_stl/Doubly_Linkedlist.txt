@@ -1,0 +1,103 @@
+#include <iostream>
+
+//Doubly linkedlist
+struct Node
+{
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+void Push(Node** head, int data)
+{
+    Node* new_node = new Node;
+    new_node->data = data;
+    
+    new_node->next = *head;
+    new_node->prev = NULL;
+    
+    if((*head) != NULL)
+        (*head)->prev = new_node;
+    
+    *head = new_node;
+}
+
+void InsertAfter(Node** current, int data)
+{
+    Node* new_node = new Node;
+    new_node->data = data;
+    new_node->next = (*current)->next;
+    
+    new_node->prev = *current;
+    
+    (*current)->next = new_node;
+    
+    if((*current)->next != NULL)
+        (*current)->next->prev = new_node;
+}
+
+void InsertBefore(Node** current, int data)
+{
+    Node* new_node = new Node;
+    new_node->data = data;
+    new_node->next = (*current);
+    new_node->prev = (*current)->prev;
+    
+    if((*current)->prev != NULL)
+    {
+        (*current)->prev->next = new_node;
+        (*current)->prev = new_node;
+    }
+    
+    *current = new_node;
+}
+
+void Append(Node** endNode, int data)
+{
+    Node* new_node = new Node;
+    Node* last = *endNode;
+    
+    new_node->data = data;
+    new_node->next = NULL;
+    new_node->next = NULL;
+    
+    if(*endNode == NULL)
+    {
+        new_node->prev = NULL;
+        *endNode = new_node;
+        return;
+    }
+    while(last->next != NULL)
+        last = last->next;
+
+    last->next = new_node;
+    new_node->prev = last;
+}
+
+void PrintNodes(Node* headref)
+{
+    Node* current = headref;
+    
+    while(current->next != NULL)
+    {
+        std::cout << current->data << " << ";
+        current = current->next;
+    }
+}
+
+int main()
+{
+    Node* head = new Node;
+    Push(&head, 50);
+    Push(&head, 40);
+    Push(&head, 30);
+    Push(&head, 20);
+    InsertAfter(&head,25);
+    InsertBefore(&head,22);
+    Push(&head, 10);
+    Append(&head,100);
+    PrintNodes(head);
+
+
+    return 0;
+}

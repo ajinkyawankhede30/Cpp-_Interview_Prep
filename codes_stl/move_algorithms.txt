@@ -1,0 +1,71 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+//WAP to find the misisng number in array ranging from 1 to n. 
+//If number is not missing in array, it should return the next number of last num.
+
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cctype>
+
+int main()
+{
+    int nums[] = {23,24,25,26,30,31,32,33,34,9};
+    std::copy(std::begin(nums), std::begin(nums) + 4, std::begin(nums) + 5);
+    std::cout << "---------Using std::copy()-------------\n";
+    for (auto i : nums) 
+    {
+        std::cout << i << " ";
+    }
+    std::cout << "\n\n--------Using copy_n()-----------\n";
+    std::copy_n(std::begin(nums), 4, std::begin(nums) + 5);
+    for (auto i : nums) 
+    {
+        std::cout << i << " ";
+    }
+    std::cout << "\n\n------------Using std::copy_if()--------------\n";
+    
+    std::string a = "Hello World! What A Great Day To Be Alive";
+    std::string upper, lower;
+    //fetch upper characters 
+    std::copy_if(a.begin(), a.end(), std::back_inserter(upper), [](char c) { return std::isupper(c);});
+    std::cout << upper << "\n";
+    
+    //find lower character
+    std::copy_if(a.begin(), a.end(), std::back_inserter(lower), [](char c) {return std::islower(c);});
+    std::cout << lower;
+    
+    std::cout << "\n";
+    
+    std::vector<int> arr;
+    //int arr[5];
+    //copy all even numbers
+    std::copy_if(std::begin(nums), std::end(nums), std::back_inserter(arr), [] (int x) {return x % 2 == 0;});
+    for (auto i : arr) 
+    {
+        std::cout << i << " ";
+    }
+    
+    std::cout << "\n\n--------------- std::move() ---------------\n";
+    std::string s[] = {"one", "two", "three", "four", "five", "six"};
+    std::string str[] = {"1", "2", "3", "4", "5", "6"};
+    
+    //std::move(std::begin(s), std::begin(s) + 3, std::begin(str));
+    //for (auto i : str)
+    //{
+    //    std::cout << i << " ";
+    //}
+    
+    std::cout << "\n\n--------------- using std::make_move_iterator() ---------------\n";
+    std::copy_if(std::make_move_iterator(std::begin(s)), std::make_move_iterator(std::end(s)), std::begin(str), [](const std::string a){ return a.size() > 3;});
+    for (auto i : str)
+    {
+        std::cout << i << " ";
+    }
+    return 0;
+}

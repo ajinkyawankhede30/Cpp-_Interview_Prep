@@ -1,0 +1,111 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+//Move_semantics
+
+#include <iostream>
+#include <utility> //std::move
+
+class Array
+{
+private:
+    size_t size;
+    int* data;
+    
+public:
+    Array(size_t val)
+        :size(val), data(new int[val])
+    {
+        std::cout << "Constructor\n";
+        
+    }
+    
+    //copy Constructor [deep copy]
+    Array(const Array& obj)
+    :   size(obj.size), data(new int[size])
+    {
+        for (int i = 0; i < size; i++) {
+            data[i] = obj.data[i];
+        }
+        std::cout << "Copied!\n";
+    }
+    
+    //move Constructor
+    Array(Array&& other) noexcept
+    :size(other.size), data(other.data)
+    {
+        other.size = 0;
+        other.data = nullptr;
+        std::cout << "Moved!\n";
+    }
+    
+    //operator overloading
+    Array& operator=(Array&& source) noexcept
+    {
+	    //This check ensures that the object is not being assigned to itself. 
+        //Self-assignment can lead to resource corruption if not handled correctly.
+        if(this != &source)
+        {
+            //free existing data
+            delete[] data; 
+            
+            //Transfer ownership of the resource
+            size = source.size;
+            data = source.data;
+            
+            //Nullify the source object's resource pointers
+            source.size = 0;
+            source.data = nullptr;
+            
+            std::cout << "Moved Assigned \n";
+        }
+        return *this; //array object
+    }
+    
+    //Destructor
+    ~Array()
+    {
+        std::cout << "Destructor\n";
+        delete[] data;
+    }
+    
+    size_t GetSize() {return size;}
+    
+    void SetVal(int idx, int val) 
+    {
+        data[idx] = val;
+    }
+    
+    void PrintData()
+    {
+        for (int i = 0; i < size; i++) 
+        {
+            
+            std::cout << data[i] << " ";
+        }
+        std::cout << "\n";
+    }
+};
+
+int main()
+{
+    Array obj1(20);  //1st obj
+    int len = obj1.GetSize();
+    for (int i = 0; i < len; i++) 
+    {
+        obj1.SetVal(i, i+1); //add data
+    }
+    
+    //2nd obj
+    Array obj2((Array&&)obj1);
+    obj2.PrintData();
+    
+    //3rd obj
+    Array obj3 = std::move(obj2);
+    obj3.PrintData();
+    return 0;
+}

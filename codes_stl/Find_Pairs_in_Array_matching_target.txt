@@ -1,0 +1,32 @@
+/*Write a program to print the pairs of numbers who's sum is equal to the target value.
+Consider the array to be in unsorted order. Avoid printing duplicate pairs and same number in pair*/
+//int arr[] = {1,2,3,4,5,6,7,8,9}
+//target = 10;
+//result = [1,9] [2,8] [4,6] [3,7]
+
+#include <iostream>
+#include <algorithm>
+
+void PrintPairs(int* arr, int size, int target)
+{
+    for (int i = 0; i < size; i++) 
+    {
+        for (int j = i+1; j < size; j++) 
+        {
+            int sum = arr[i] + arr[j];
+              if(sum == target)
+                std::cout << arr[i] << " " << arr[j]<< "\n";
+        }
+    }
+}
+
+int main()
+{
+    //int arr[] = {1,2,3,4,5,6,7,8,9};
+    int arr[] = {5,3,9,4,7,2,6,8,1};
+    int size = sizeof(arr)/ sizeof(int);
+    //std::sort(arr, arr+size);
+    PrintPairs(arr, size, 10);
+
+    return 0;
+}

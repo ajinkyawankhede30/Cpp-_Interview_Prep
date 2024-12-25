@@ -1,0 +1,57 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+//using namespace std;
+
+//1. Using while loop
+void ReverseStr(std::string& str)
+{
+    int left = 0, right = str.length()-1;
+    while(left != right)
+    {
+        std::swap(str[left], str[right]);
+        left++;
+        --right;
+    }
+    
+}
+
+//2. Using for loop
+void ReverseString(std::string& str)
+{
+    int len = str.length() -1;
+    for(int i = 0; i <= len/2; i++)
+    {
+        std::swap(str[i], str[len-i]);
+    }
+}
+
+int main()
+{
+    std::string str;
+    std::cout << "Enter String: ";
+    //std::cin >> str;
+    std::getline(std::cin, str);
+    //1.
+    //ReverseStr(str);
+    //std::cout <<"Reverse: " << str << std::endl;
+    
+    //2.
+    //ReverseString(str);
+    //std::cout <<"Reverse: " << str << std::endl;
+    
+    //3.
+    std::cout << "Enter String: ";
+    std::getline(std::cin, str);
+    std::reverse(str.begin(), str.end());
+    std::cout <<"Reverse: " << str << std::endl;
+    return 0;
+}

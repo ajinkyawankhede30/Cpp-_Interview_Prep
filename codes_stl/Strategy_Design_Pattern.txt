@@ -1,0 +1,68 @@
+using System;
+
+public interface IPaymentStrategy
+{
+    void ProcessPayment(double amount);
+}
+
+public class CreditCardPayment : IPaymentStrategy
+{
+    public void ProcessPayment(double amount)
+    {
+        Console.WriteLine("Processing $"+ amount + " using credit card.");
+    }
+}
+
+public class DebitCardPayment : IPaymentStrategy
+{
+    public void ProcessPayment(double amount)
+    {
+        Console.WriteLine("Prosessing $: " + amount + " using debit card...");
+    }
+}
+
+public class UPIPayment : IPaymentStrategy
+{
+    public void ProcessPayment(double amount)
+    {
+        Console.WriteLine("Prossesing $: "+ amount + " using upi...");
+    }
+}
+
+public class PaymentService
+{
+    private readonly IPaymentStrategy _paymentStrategy;
+    
+    public PaymentService(IPaymentStrategy paymentStrategy)
+    {
+        _paymentStrategy = paymentStrategy;
+    }
+    
+    public void Payment(double amount)
+    {
+        Console.WriteLine("Pre processing logic...");
+        _paymentStrategy.ProcessPayment(amount);
+        Console.WriteLine("Post processing logic...");
+        Console.WriteLine("\n");
+    }
+}
+
+class Program
+{
+    public static void Main()
+    {
+        var creditCardPayment = new CreditCardPayment();
+        var debitcardPayment = new DebitCardPayment();
+        var upiPayment = new UPIPayment();
+        
+        var creditcarPaymentService = new PaymentService(creditCardPayment);
+        creditcarPaymentService.Payment(400.657);
+        
+        var debitcardPaymentService = new PaymentService(debitcardPayment);
+        debitcardPaymentService.Payment(300.763);
+        
+        var upiPaymentService = new PaymentService(upiPayment);
+        upiPaymentService.Payment(600.234);
+        
+    }
+}
