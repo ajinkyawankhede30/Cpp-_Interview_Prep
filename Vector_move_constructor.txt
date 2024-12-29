@@ -1,0 +1,107 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <algorithm>
+#include <utility>
+
+struct Vector 
+{
+    int* data;
+    int size;
+    
+public:
+    Vector()
+        :data(nullptr),size(0)
+    {}
+    
+    Vector(int size)
+        :data(new int[size]), size(size)
+        {}
+    
+    Vector(const Vector& obj)
+    {
+        size = obj.size;
+        data = new int[size];
+        for (int i = 0; i < size; i++) {
+            data[i] = obj.data[i];
+        }
+    }
+    
+    Vector(Vector&& obj) noexcept
+    {
+        size = obj.size;
+        data = new int[size];  
+        for (int i = 0; i < size; i++) {
+            data[i] = obj.data[i];
+        }
+        obj.data = nullptr;
+        obj.size = 0;
+        
+        std::cout << "Move constructor is called\n";
+    }
+
+    
+    Vector& operator=(const Vector& obj)
+    {
+        if(this == &obj)
+            return *this;
+        
+        delete[] data;
+        size = obj.size;
+        data = new int[size];
+        for (int i = 0; i < size; i++) {
+            data[i] = obj.data[i];
+        }
+        return *this;
+    }
+    
+    int& operator[](int index)
+    {
+        if(index >= size)
+            throw std::out_of_range("Index out of range.\n");
+        return data[index];
+    }
+    
+    ~Vector()
+    {
+        delete[] data;
+    }
+};
+
+void print(const Vector& obj)
+{
+    for (int i = 0; i < obj.size; i++) {
+        std::cout << obj.data[i] << " ";
+    }
+    std::cout << "\n";
+}
+
+int main()
+{
+    Vector obj;
+    obj.size = 3;
+    obj.data = new int[3];
+    int i =0;
+    while(i < 3)
+    {
+        obj.data[i] = i+1;
+        i++;
+    }
+    print(obj);
+    
+    Vector obj2((Vector&&) obj); //move constrcutor is called
+    //Vector obj2(obj); copy constructor is called
+    print(obj2);
+    std::cout << obj2[2] << "\n";
+    
+    Vector obj2(obj);
+    
+    std::cout << obj.size << "\n";
+    return 0;
+}

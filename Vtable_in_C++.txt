@@ -1,0 +1,75 @@
+The concept of the "vtable" (short for "virtual table") is fundamental to how polymorphism is implemented in C++. Let's explore what a vtable is and how it works.
+
+### What is a Vtable?
+
+A vtable is a table of function pointers. It is used to support dynamic (or run-time) polymorphism in languages like C++. When a class contains virtual functions, the compiler creates a vtable for that class. The vtable holds pointers to the virtual functions implemented by the class.
+
+### How Does it Work?
+
+1. **Class with Virtual Functions**:
+   When a class contains at least one virtual function, the compiler creates a vtable for that class. Each class with virtual functions has its own vtable.
+
+2. **Vtable Structure**:
+   The vtable contains entries for each virtual function in the class. Each entry is a pointer to the corresponding function's implementation.
+
+3. **Vptr (Virtual Table Pointer)**:
+   Each object of a class with virtual functions contains a hidden pointer called the "vptr." The `vptr` points to the vtable of the object's class.
+
+4. **Dynamic Dispatch**:
+   When a virtual function is called on an object, the call is resolved at runtime using the `vptr`. The `vptr` directs the call to the appropriate function in the vtable, allowing the correct function to be executed based on the actual object type.
+
+### Example:
+
+Here's a simple example to illustrate how vtables work:
+
+```cpp
+#include <iostream>
+
+class Base {
+public:
+    virtual void func() {
+        std::cout << "Base func" << std::endl;
+    }
+    virtual ~Base() = default;  // Ensures a vtable is created for Base
+};
+
+class Derived : public Base {
+public:
+    void func() override {
+        std::cout << "Derived func" << std::endl;
+    }
+};
+
+int main() {
+    Base* basePtr = new Derived();
+    basePtr->func();  // Calls Derived::func due to vtable mechanism
+
+    delete basePtr;
+    return 0;
+}
+```
+
+### Explanation:
+- **Base Class**:
+  - The `Base` class has a virtual function `func()`.
+  - The compiler creates a vtable for `Base` with an entry pointing to `Base::func`.
+
+- **Derived Class**:
+  - The `Derived` class overrides the `func()` method.
+  - The compiler creates a vtable for `Derived` with an entry pointing to `Derived::func`.
+
+- **Object Creation**:
+  - When `new Derived()` is called, an object of `Derived` is created with its `vptr` pointing to the `Derived` vtable.
+
+- **Function Call**:
+  - When `basePtr->func()` is called, the call is resolved at runtime. The `vptr` of the `basePtr` object points to the `Derived` vtable, and the correct function (`Derived::func`) is called.
+
+### Advantages of Vtables:
+- **Supports Polymorphism**: Allows for dynamic dispatch and runtime method resolution.
+- **Encapsulation**: Ensures that the appropriate method is called based on the actual object type.
+
+### Considerations:
+- **Overhead**: There is a slight overhead due to the extra memory required for the vtable and the additional indirection during virtual function calls.
+- **Complexity**: While vtables are mostly handled by the compiler, understanding them can help in debugging issues related to polymorphism.
+
+If you have more questions or need further details, feel free to ask! 😊

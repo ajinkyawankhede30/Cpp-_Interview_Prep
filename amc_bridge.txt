@@ -1,0 +1,89 @@
+class A
+{
+public:
+	A() { std::cout << "A constructor" << std::endl;}
+	~A() { std::cout << "A destructor" << std::endl; }
+}
+
+class B : public A
+{
+public:
+	B() {std::cout << "B constructor" << std::endl;}
+	~B() {std::cout << "B destructor" << std::endl;}
+}
+
+int main()
+{
+	A* parent = new B;
+
+	return 0;
+}
+
+// INPUT:     A set of (X, Y) points, a circle of radius R and center at (0, 0)
+// OUTPUT:  Subset of points that are inside the given circl
+
+
+void CheckPoint(double x, double y, double rad)
+{
+	int distance = sqrt(x-0)^2, y-0)^2);
+  if(distanace > rad)
+  	std::cout << "pint is outside\n";
+  else if( distance < rad)
+    std::cout << "Point is inside\n";
+  else
+    std::cout << "Point lies on the circle\n";
+}
+
+
+
+
+
+struct Vector
+{
+    // TODO: Write copy constructor
+    // TODO: Write operator=
+    // TODO: Write destructor
+public :
+		
+    Vector(int size)
+    	:data(new int[size]), size(size)
+      {}
+      
+    Vector(const Vector& obj)
+    {
+    		size = obj->size;
+        for(int i = 0; i < size; i++)
+        {
+        	data[i] = obj->data[i];
+        }
+    }
+    
+    Vector& operator=(const Vector& obj)
+    {
+    	delete[] data;
+    	size = obj->size;
+        for(int i = 0; i < size; i++)
+        {
+        	data[i] = obj->data[i];
+        }     
+			return *this;
+    }
+    
+    ~Vector()
+    {
+    	delete[] data;
+    }
+private:
+    int* data;
+    int size;
+};
+
+
+
+
+
+
+
+
+
+

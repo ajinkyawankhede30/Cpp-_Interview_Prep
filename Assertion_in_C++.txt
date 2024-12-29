@@ -1,0 +1,79 @@
+### Assertion in C++
+
+An assertion in C++ is a statement that is used to verify the correctness of assumptions made by the program. Assertions are primarily used as a debugging aid. When an assertion is encountered, the program evaluates the condition provided in the assertion. If the condition evaluates to `true`, the program continues executing normally. If the condition evaluates to `false`, the assertion fails, and the program is typically terminated with an error message.
+
+### assert Macro
+
+The `assert` macro is provided by the C++ Standard Library in the `<cassert>` header. It is used to insert diagnostic checks into a program. The `assert` macro is a way to catch logical errors and program bugs during development.
+
+### How assert Works
+
+1. **Condition Check**: The condition provided to the `assert` macro is evaluated.
+2. **Success**: If the condition evaluates to `true`, the `assert` macro has no effect, and the program continues executing normally.
+3. **Failure**: If the condition evaluates to `false`, the `assert` macro writes an error message to the standard error stream (`stderr`) and calls `abort` to terminate the program. The error message includes the condition that failed, the name of the source file, and the line number where the assertion failed.
+
+### Syntax
+
+```cpp
+#include <cassert>
+
+void someFunction(int value) {
+    assert(value >= 0); // This assertion checks that the value is non-negative
+    // Function logic
+}
+
+int main() {
+    int x = -1;
+    someFunction(x); // This will trigger the assertion
+
+    return 0;
+}
+```
+
+### Example
+
+Here’s a simple example to illustrate the use of `assert`:
+
+```cpp
+#include <iostream>
+#include <cassert>
+
+void process(int number) {
+    assert(number > 0); // Ensure the number is positive
+    std::cout << "Processing number: " << number << std::endl;
+}
+
+int main() {
+    int num1 = 5;
+    int num2 = -3;
+    
+    process(num1); // This will pass the assertion
+    process(num2); // This will trigger the assertion
+    
+    return 0;
+}
+```
+
+### Why Use Assertions?
+
+1. **Catch Bugs Early**: Assertions help catch logical errors and bugs early in the development process.
+2. **Documentation**: They serve as documentation, making the assumptions and invariants of the code explicit.
+3. **Debugging**: They are useful for debugging by providing immediate feedback when an assumption is violated.
+
+### Considerations
+
+- **Development Only**: Assertions should generally be used for development and debugging purposes. They can be disabled in production code by defining the `NDEBUG` macro before including the `<cassert>` header, which can improve performance.
+- **Do Not Handle Errors**: Assertions are not a substitute for proper error handling. They should not be used to check user input or recoverable errors.
+
+### Disabling Assertions
+
+You can disable assertions by defining the `NDEBUG` macro:
+
+```cpp
+#define NDEBUG
+#include <cassert>
+```
+
+With `NDEBUG` defined, the `assert` macro does nothing, and the condition is not checked.
+
+Assertions are a powerful tool for developers to ensure code correctness and catch bugs early in the development cycle. If you have any more questions or need further details, feel free to ask! 😊

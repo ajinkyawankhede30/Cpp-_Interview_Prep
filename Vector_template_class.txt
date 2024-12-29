@@ -1,0 +1,150 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+//Custom Vector class
+
+#include <iostream>
+#include <stdexcept>
+
+template <typename T>
+class Vector
+{
+    private:
+        T* data;
+        size_t m_size;
+        size_t m_capacity;
+        void resize(size_t new_capacity);
+    
+    public:
+        void push_back(const T& val);
+        void pop_back();
+        bool empty() const;
+        void clear();
+        size_t size() const;
+        T at(int index);
+        T& operator[](int index);
+        void print();
+        
+    Vector();
+    ~Vector();
+};
+
+template <typename T>
+Vector<T>::Vector() 
+: data(0), m_size(0), m_capacity(1) 
+{
+    data = new T[m_capacity];
+}
+
+template <typename T>
+Vector<T>::~Vector() 
+{
+    delete[] data;
+}
+
+template <typename T>
+void Vector<T>::resize(size_t new_capacity) 
+{
+
+        //int new_capacity = 2 * m_capacity;
+        
+        T* new_data = new T[new_capacity];
+        
+        for (int i = 0; i < m_size; i++) {
+            new_data[i] = data[i];
+        }
+        
+        delete[] data;
+        data = new_data;
+        m_capacity = new_capacity; 
+}
+
+template <typename T>
+void Vector<T>::push_back(const T& val)
+{
+    if(m_size == m_capacity)
+        resize(2 * m_capacity);
+    data[m_size++] = val;    
+}
+
+template <typename T>
+bool Vector<T>::empty() const
+{
+    return (m_size == 0);
+}
+
+template <typename T>
+void Vector<T>::clear()
+{
+    delete[] data;
+    m_size = 0;
+    m_capacity = 1;
+    data = new T[m_capacity];
+}
+
+template <typename T>
+size_t Vector<T>::size() const
+{
+    return m_size;
+}
+
+template <typename T>
+void Vector<T>::pop_back()
+{
+    if(m_size == 0)
+        throw std::out_of_range("Index out of range.");
+    m_size--;
+}
+
+template <typename T>
+T Vector<T>::at(int index)
+{
+    if(index > m_size || index < 0)
+        throw std::out_of_range("Index out of range");
+    return data[index];
+}
+
+template <typename T>
+T& Vector<T>::operator[](int index)
+{
+    if(index >= m_size)
+        throw std::out_of_range("Index out of range.");
+        
+    return data[index];
+}
+
+template <typename T>
+void Vector<T>::print()
+{
+    for (int i = 0; i < m_size; i++) {
+        std::cout << data[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main()
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+    vec.push_back(30);
+    vec.push_back(40);
+    vec.push_back(50); 
+    
+    vec.print();
+    vec.pop_back();
+    vec.print();
+    
+    std::cout << vec.at(2) << "\n";
+    std::cout << vec.size() << "\n";
+    std::cout << (vec.empty()  ? "TRUE" : "FALSE") << "\n";
+    vec.clear();
+    std::cout << (vec.empty()  ? "TRUE" : "FALSE") << "\n";
+    
+    
+    return 0;
+}
