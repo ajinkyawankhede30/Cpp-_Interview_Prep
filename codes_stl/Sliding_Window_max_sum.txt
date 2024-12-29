@@ -1,0 +1,39 @@
+#include <iostream>
+
+int MaxSum(int* array, int n, int k)
+{
+	if(n < k)
+	{
+	   std::cout << "Invalid" << std::endl;
+	   return -1;
+	}
+	int max_sum = 0;
+	//Add first k elements and call it first window
+	for(int i = 0; i < k; i++)
+	{
+		max_sum += array[i];
+	}
+
+	int window_sum = max_sum;
+	for(int i = k; i < n; i++)
+	{
+		//add next elememt and subtract first element from window
+		window_sum = window_sum + array[i] - array[i - k];
+
+		//compare and get the max sum
+		max_sum = std::max(max_sum, window_sum);
+	}
+	return max_sum;
+}
+
+int main()
+{
+	int nums[] = {1, 4, 2, 10, 2, 3, 1, 0, 20};
+	int n = sizeof(nums) / sizeof(int);
+	int k = 3;
+	std::cout << "Max sum of " << k << " consecutive numbers in given array is ";
+	std::cout << MaxSum(nums, n, k) << std::endl;
+	return 0;
+}
+
+

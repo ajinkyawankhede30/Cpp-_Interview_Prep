@@ -1,0 +1,57 @@
+#include <iostream>
+
+//Abstract class
+class Car
+{
+    //declaration
+    public:
+    virtual void Engine() = 0; //data members
+    virtual void Transmission() = 0; //data members
+};
+
+class Tata : public Car
+{
+    public:
+    
+    //definition
+    void Engine()
+    {
+        std::cout << "Tata is called\n";
+    }
+    
+    //definition
+    void Transmission()
+    {
+        std::cout << "Tata trans is called\n";
+    }
+};
+
+class Huyndai : public Car
+{
+    public:
+    void Engine()
+    {
+        std::cout << "Hundai Engine is called\n";
+    }
+    
+    void Transmission()
+    {
+        std::cout << "Hyndia Transmission is called\n";
+    }
+};
+
+int main()
+{
+    
+    Car* nexon = new Tata();
+    nexon->Engine();
+    nexon->Transmission();
+    
+    std::cout << "-------------------------------------------\n";
+    
+    Car* verna = new Huyndai();
+    verna->Engine();
+    verna->Transmission();
+    
+    return 0;
+}

@@ -1,0 +1,49 @@
+#include <iostream>
+
+struct ListNode {
+    int data;
+    ListNode* next;
+    ListNode(int x) : data(x), next(nullptr) {}
+};
+
+ListNode* findMiddle(ListNode* head) {
+    if (head == nullptr) return nullptr;
+
+    ListNode* slow = head;
+    ListNode* fast = head;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void printList(ListNode* head) {
+    while (head != nullptr) {
+        std::cout << head->data << " ";
+        head = head->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+    head->next->next->next->next = new ListNode(5);
+
+    std::cout << "List: ";
+    printList(head);
+
+    ListNode* middle = findMiddle(head);
+    if (middle != nullptr) {
+        std::cout << "Middle element: " << middle->data << std::endl;
+    } else {
+        std::cout << "List is empty." << std::endl;
+    }
+
+    return 0;
+}

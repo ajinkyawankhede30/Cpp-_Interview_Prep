@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+    std::vector<int> nums = {1,2,54,6,89,36,78,25};
+    
+    //count all the number <= 50
+    int count = std::count_if(nums.begin(), nums.end(), [](int x) -> bool
+    {
+       return x >= 50; 
+    });
+    
+    std::cout << "Count of numbers greater than 50: " << count << std::endl;
+    
+    //print all the numbers less than 50
+    std::cout << "Numbers greater than 50: ";
+    for_each(nums.begin(), nums.end(), [] (int x)
+    {
+        if(x > 50)
+            std::cout << x << ", ";
+    });
+    
+    //Sort in decending order
+    std::sort(nums.begin(), nums.end(), [](int a, int b) -> bool
+    {
+        return a > b;
+    });
+    
+    std::cout << "\nNumbers sorted in descending order: ";
+    for_each(nums.begin(), nums.end(), [](int x)
+    {
+       std::cout << x << ", "; 
+    });
+    
+    return 0;
+}

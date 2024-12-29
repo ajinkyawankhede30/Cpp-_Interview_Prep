@@ -1,0 +1,81 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+struct Node
+{
+    int data;
+    Node* left, *right;
+    
+    Node(int data)
+    :data(data)
+    {
+        left = NULL;
+        right = NULL;
+    }
+};
+
+void InOrderTransversal(Node* node)
+{
+    if(node == NULL)
+        return;
+    
+    InOrderTransversal(node->left);
+    
+    std::cout << node->data << " << ";
+    
+    InOrderTransversal(node->right);
+
+}
+
+void PreOrderTransversal(Node* node)
+{
+    if(node == NULL)
+        return;
+    
+    std::cout << node->data << " << ";
+    
+    PreOrderTransversal(node->left);
+    PreOrderTransversal(node->right);
+    
+}
+
+void PostOrderTransvresal(Node* node)
+{
+    if(node == NULL)
+        return;
+        
+    PostOrderTransvresal(node->left);
+    
+    PostOrderTransvresal(node->right);
+    std::cout << node->data << " << ";
+    
+}
+
+int main()
+{
+    Node* newNode = new Node(1);
+    newNode->left = new Node(2);
+    newNode->right = new Node(3);
+    newNode->left->left = new Node(4);
+    newNode->left->right = new Node(5);
+    
+    newNode->right->left = new Node(6);
+    newNode->right->right = new Node(7);
+    
+    InOrderTransversal(newNode);
+    std::cout << "NULL" << std::endl;
+    
+    PreOrderTransversal(newNode);
+    std::cout << "NULL" << std::endl;
+    
+    PostOrderTransvresal(newNode);
+    std::cout << "NULL" << std::endl;
+    return 0;
+}

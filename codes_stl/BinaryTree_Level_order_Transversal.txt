@@ -1,0 +1,84 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+class Binarytree
+{
+public:
+    struct Node
+    {
+      int data;
+      Node* left;
+      Node* right;
+      
+      Node(int data)
+      :data(data)
+      {
+          left = right = NULL;
+      }
+    };
+private:
+    int Height(Node* node);
+    void PrintCurrentLevel(Node* root, int level);
+public:
+    void PrintLevelOrder(Node* node);
+};
+
+//Calculate Height of binary tree
+int Binarytree::Height(Node* node)
+{
+    int lheight, rheight;
+    if(node == NULL)
+        return 0;
+    else
+    {
+        lheight = Height(node->left);
+        rheight = Height(node->right);
+    }
+    
+    return std::max(lheight, rheight) + 1;
+}
+
+void Binarytree::PrintCurrentLevel(Node* root, int level)
+{
+    if(root == NULL)
+        return;
+    if(level == 1)
+        std::cout << root->data << " ";
+    else if(level > 1)
+    {
+        PrintCurrentLevel(root->left, level-1);
+        PrintCurrentLevel(root->right, level-1);
+    }
+}
+
+void Binarytree::PrintLevelOrder(Node* root)
+{
+    int height = Height(root);
+    for (int i = 1; i <= height; i++) {
+        PrintCurrentLevel(root, i);
+    }
+}
+
+int main()
+{
+    
+    Binarytree tree;
+    tree::Node *root = new tree::Node(1);
+    root->left = new tree.Node(2);
+    root->right = new tree.Node(3);
+    
+    root->left->left = new tree.Node(4);
+    root->left->right = new tree.Node(5);
+    
+    root->right->left = new tree.Node(6);
+    root->right->right = new tree.Node(7);
+    
+    tree.PrintLevelOrder(root);
+    return 0;
+}

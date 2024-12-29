@@ -1,0 +1,31 @@
+#include <iostream>
+
+void PrintFibonacciSeries(int n)
+{
+    int n1 = 0; int n2 = 1; int next;
+    for (int i = 1; i <= n; i++) {
+        
+        if(i == 1)
+        {
+            std::cout << n1 << " ";
+            continue;
+        }
+        
+        if(i == 2)
+        {
+            std::cout << n2 << " ";
+            continue;
+        }
+        
+        next = n1 + n2;
+        n1 = n2;
+        n2 = next;
+        std::cout << next << " ";
+    }
+}
+
+int main()
+{
+	PrintFibonacciSeries(12);
+	return 0;
+}

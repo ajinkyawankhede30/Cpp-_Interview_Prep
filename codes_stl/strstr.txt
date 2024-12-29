@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string.h>
+
+//using namespace std;
+void find_str(char* s1, char* s2)
+{
+    char* result = strstr(s1, s2);
+    if(result)
+    {
+        std::cout << "Found first occurence of string \'" << result << "\' at index: " << (result - s1) << std::endl;
+        std::cout << "\n\n";
+    }
+    else
+        std::cout << "String not found...\n" << std::endl;
+}
+
+int main()
+{
+    char s1[] = "This is the sample string";
+    char s2[] = "the sample string";
+    char s3[] = "";
+    char s4[] = "Hello";
+    char s5[] = "s";
+    
+    find_str(s1, s2);
+    find_str(s1, s3);
+    find_str(s1, s4);
+    find_str(s1, s5);
+    
+    return 0;
+}

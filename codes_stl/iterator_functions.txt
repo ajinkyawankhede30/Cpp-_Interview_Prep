@@ -1,0 +1,58 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+
+
+int main()
+{
+    //1. advance: advance the current iterator by nth position 
+    //2. next/prev: return the new iterator at specified position
+    
+    //**while going from start count from 0 and while going from end count from 1
+
+    std::vector<int> vect = {45,25,65,35,75,95};
+    std::vector<int>::iterator itr = vect.begin();
+    
+    auto itr1 = std::next(itr, 0); //output : 35
+    std::cout << *itr1 << std::endl;
+    
+    auto itr0 = vect.end();
+    auto itr4 = std::next(itr0, -3); //output: 35
+    std::cout << *itr4 << std::endl;
+    
+    auto itr2 = std::prev(itr, -2); //output : 65
+    std::cout << *itr2 << std::endl;
+    
+    auto itr3 = std::prev(itr0, 4); //output : 65
+    std::cout << *itr3 << std::endl;
+    
+    auto itr5 = std::prev(itr, -4); //output : 75
+    std::cout << *itr5 << std::endl;
+    
+    auto itr6 = std::next(itr, 5); //output : 95
+    std::cout << *itr6 << std::endl;
+    
+    auto itr7 = std::prev(itr0, 4); //output : 65
+    std::cout << *itr7 << std::endl;
+    
+    //returns value at 5th index
+    std::advance(itr, 5); //output : 95
+    std::cout << *itr << std::endl;
+    
+    //start count from -1 from end
+    std::advance(itr0, -5);  //output : 25
+    std::cout << *itr0 << std::endl;
+    
+    std::advance(itr4, 2);
+    std::cout << *itr4 << std::endl; // output 95
+    
+    std::cout << vect[0] << std::endl;
+    return 0;
+}

@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+std::string removeSpecialCharactersAndSpaces(const std::string& inputString) {
+    std::string cleanedString;
+    for (char c : inputString) {
+        if (std::isalnum(c)) {  // Keep alphanumeric characters
+            cleanedString += c;
+        }
+    }
+    return cleanedString;
+}
+
+int main() {
+    std::string inputString = "Hello, World! This is a test string with special characters and spaces.";
+    std::string cleanedString = removeSpecialCharactersAndSpaces(inputString);
+    std::cout << "Cleaned string: " << cleanedString << std::endl;
+    return 0;
+}
+
+
+//Method 2: Witout creating additional memory
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+void removeSpecialCharactersAndSpaces(std::string& inputString) {
+    inputString.erase(std::remove_if(inputString.begin(), inputString.end(),
+         { return !std::isalnum(c); }), inputString.end());
+}
+
+int main() {
+    std::string inputString = "Hello, World! This is a test string with special characters and spaces.";
+    removeSpecialCharactersAndSpaces(inputString);
+    std::cout << "Cleaned string: " << inputString << std::endl;
+    return 0;
+}

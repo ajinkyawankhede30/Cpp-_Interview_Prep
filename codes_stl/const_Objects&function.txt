@@ -1,0 +1,67 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+//**Notes:Const object can only invoke const data members of the class. It gives compiler error 
+// if we try to access any non-const data member through const object.
+//A function becomes const when the const keyword is used in the function’s declaration. 
+//The idea of const functions is not to allow them to modify the object on which they are called.
+//Non-const object can invoke both const and non-const functions
+
+#include <iostream>
+class Test
+{
+    int value;
+    
+    public:
+        Test(int x =0 ){ value = x;}
+        
+    //const function
+    int GetValue() const {return value;}
+    
+    //non-const function
+    void SetValue(int x) {value = x;}
+
+    //const function
+    void DisplayVal() const;
+
+};
+
+//const function defined outside class
+void Test::DisplayVal() const{
+
+	//value++; //gives run time error as object cannot be modified in const function
+	std::cout << value << std::endl;
+
+}
+
+int main()
+{
+    Test t(100);
+    
+    //non-const object accessing const function
+    int val = t.GetValue();
+    std::cout << val << std::endl;
+    
+    //non-const object accessing non-const function
+    t.SetValue(120);
+    
+    //non-const object accessing const function
+    t.DisplayVal();
+    
+    //creating const object
+    const Test cTest(150);
+    
+    //const object accessing const function
+    int const_val = cTest.GetValue();
+    std::cout << const_val << std::endl;
+    
+    //const object invoking non-const object. Gives error
+    //cTest.SetValue(200);
+    
+    cTest.DisplayVal();
+    return 0;
+}

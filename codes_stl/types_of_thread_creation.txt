@@ -1,0 +1,49 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+using namespace std::chrono;
+
+/*
+//1.using function pointer
+void func1(int x)
+{
+    while(x-- > 0)
+        std::cout << x << "\n";
+}
+
+int main()
+{
+
+    std::thread t1(func1, 10);
+    t1.join();
+
+    return 0;
+}*/
+
+
+//2. using lamda function
+int main()
+{
+    
+    std::thread t2( [](int x)
+    {
+        while(x-- > 0)
+            std::cout << x << "\n";
+    }
+    , 10);
+    
+    t2.join();
+    
+    return 0;
+}
+
+
